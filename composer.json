@@ -1,0 +1,23 @@
+{
+  "name": "the16thpythonist/indico-api",
+  "description": "A REST Api wrapper for accessing events from the Indico API (Unofficial)",
+  "type": "library",
+  "version": "0.0.0.0",
+  "authors": [
+    {
+      "name": "Jonas Teufel",
+      "email": "jonseb1998@gmail.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "6.2.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6"
+  },
+  "autoload": {
+    "psr-4": {
+      "the16thpythonist\\Indico\\": "src/the16thpythonist/Indico"
+    }
+  }
+}
