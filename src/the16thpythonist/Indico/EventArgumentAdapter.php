@@ -70,9 +70,13 @@ class EventArgumentAdapter
      * Added 10.07.2018
      *
      * Changed 16.07.2018
-     *
      * The format string, which was used for the creation of the DateTime object was wrong. The symbol 'i' stands for
      * minutes and not 'H'. This would result in the method just returning False.
+     *
+     * Changed 08.08.2018
+     * Using a substing of the time string, because sometimes it would also contain the milliseconds, which would
+     * lead to the DateTime object creation not working, due to improper format. With the substring the milliseconds are
+     * being cut off in any case
      *
      * @param array $args
      * @return bool|DateTime
