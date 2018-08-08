@@ -14,3 +14,5 @@
 
 - Fixed a bug with the 'modificationDate' key sometimes not existing in the raw data returned from indico.
 In such a case the creation time is used as the modification time as well.
+- Fixed a bug with the time formats returned by indico **sometimes** containing the milliseconds as well, which 
+would lead to the DateTime creation not working.

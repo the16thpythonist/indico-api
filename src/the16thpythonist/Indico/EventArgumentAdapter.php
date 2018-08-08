@@ -78,7 +78,9 @@ class EventArgumentAdapter
      * @return bool|DateTime
      */
     private function createDateTime(array $args) {
-        $string = $args['date'] . ' ' . $args['time'];
+        // Using a substring of the time, because sometimes there is the possibility of the milliseconds also being part
+        // of the string and then the format doesnt work
+        $string = $args['date'] . ' ' . substr($args['time'], 0, 8);
         $datetime = DateTime::createFromFormat('Y-m-d H:i:s', $string);
         return $datetime;
     }
