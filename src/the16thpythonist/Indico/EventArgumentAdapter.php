@@ -37,6 +37,11 @@ class EventArgumentAdapter
      *
      * Added 10.07.2018
      *
+     * Changed 08.08.2018
+     * Checking if the 'modificationDate' key even exists in the args array, because when events have just been created
+     * sometimes the item will not even exist. In such a case the 'creationDate' will be used as the time of last
+     * modification.
+     *
      * @since 0.0.0.0
      *
      * @return array
@@ -46,7 +51,14 @@ class EventArgumentAdapter
         $args['creator']['name'] = $args['creator']['fullName'];
         $args['start_time'] = $this->createDateTime($args['startDate']);
         $args['end_time'] = $this->createDateTime($args['endDate']);
-        $args['modification_time'] = $this->createDateTime($args['modificationDate']);
+        // Sometimes when a event hasnt been modified yet, the modificationDate item will not even exist leading to an
+        // error, in this case the creation date will be used as the date of last modification
+        if (array_key_exists('modificationDate', $args)) {
+            $args['modification_time'] = $this->createDateTime($args['modificationDate']);
+        } else {
+            $args['modification_time'] = $this->createDateTime($args['creationDate']);
+        }
+
         return $args;
     }
 
