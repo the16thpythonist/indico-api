@@ -22,7 +22,7 @@ use Prophecy\Exception\InvalidArgumentException;
 class IndicoApi
 {
     const DEFAULT_CONFIG = array(
-        'timeout'   => 30
+        'timeout'   => 60
     );
 
     public $key;
@@ -48,11 +48,11 @@ class IndicoApi
      * @param string $key   the api key to be used to access the api off the specified indico site
      * @param array $config an associative array containing the configuration options for the api object
      */
-    public function __construct(string $url, string $key, array $config=self::DEFAULT_CONFIG)
+    public function __construct(string $url, string $key, array $config=array())
     {
         $this->url = $url;
         $this->key = $key;
-        $this->config = $config;
+        $this->config = array_replace(self::DEFAULT_CONFIG, $config);
 
         // Creating the client
         $this->client = new Client(array(

@@ -42,6 +42,10 @@ class EventArgumentAdapter
      * sometimes the item will not even exist. In such a case the 'creationDate' will be used as the time of last
      * modification.
      *
+     * Changed 06.01.2018
+     * Added a loop at the end, which iterates through the whole args array and replaces each NULL value with an
+     * empty string, because it is super important that strings are returned as values by the Event object.
+     *
      * @since 0.0.0.0
      *
      * @return array
@@ -57,6 +61,16 @@ class EventArgumentAdapter
             $args['modification_time'] = $this->createDateTime($args['modificationDate']);
         } else {
             $args['modification_time'] = $this->createDateTime($args['creationDate']);
+        }
+
+        // 06.01.2019
+        // It is possible, that the 'location' and 'address' fields, which are present in the original response array
+        // have the value NULL, but it is super important, that only strings are returned, which is why we will add
+        // this loop, that replaces every NULL value with an empty string
+        foreach ($args as $key => $value) {
+            if ($value === NULL) {
+                $args[$key] = '';
+            }
         }
 
         return $args;
